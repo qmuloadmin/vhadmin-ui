@@ -133,7 +133,7 @@ impl StatusPage {
     }
 
     fn fetch_server_status(&self) -> FetchTask {
-        let request = Request::get("http://localhost:8000/test.json")
+        let request = Request::get("/vhadminapi/status")
             .body(Nothing)
             .expect("Could not build get status request");
         let callback = self.link.callback(
@@ -151,7 +151,7 @@ impl StatusPage {
 
     fn request_server_action(&self, server: &Server, action: &ServerAction) -> FetchTask {
         let body = ServerRequest { server, action };
-        let request = Request::post("http://localhost:8000/action")
+        let request = Request::post("/vhadminapi/action")
             .body(Json(&body))
             .expect("could not build action request");
         let callback = self.link.callback(
